@@ -139,11 +139,31 @@ let findFruit = fruits.find(fruit => fruit.includes('苹果'));//返回第一个
 // filter() - 查找所有符合条件的元素
 let allApples = fruits.filter(fruit => fruit.includes('苹果'));//返回所有包含'苹果'的元素:  红苹果
         
+
 ```
+
+###### 数组遍历
+
+```js
+//for循环遍历
+
+//map()方法遍历返回一个数组  map有返回值  forEach无返回值
+const arr=['red','green','blue']
+const newarr=arr.map(function(elem,index){
+  console.log(elem)  //elem是数组中的每一个元素
+  console.log(index) //index是数组中每一个元素的索引
+  return elem+'颜色'
+})
+console.log(newarr) //['red颜色','green颜色','blue颜色']
+```
+
+
+
+### 五.数据类型
 
 ------
 
-### 五.数据类型
+
 
 ###### 检测数据类型方法:   typeof x
 
@@ -167,6 +187,8 @@ console.log(typeof(num))
 let a='hello world'
 let b='hello js'
 console.log(a+b);//'+'可实现字符串拼接，结果为'hello worldhello js'
+
+
 
 ```
 

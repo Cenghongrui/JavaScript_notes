@@ -701,3 +701,130 @@ JSON.stringify()//把对象转换成json字符串
 JSON.prase()//把json字符串转换为对象
 ```
 
+## 正则表达式
+
+### 介绍
+
+用于匹配字符串的一种模式, 在js中是一种对象
+
+可用于：表单验证， 过滤敏感词， 字符串中提取目标部分
+
+
+
+### 基本语法
+
+```javascript
+const 变量名 = /表达式/
+
+//示例
+
+const str = 'hello javascript world'
+//定义规则
+const reg = /java/  //查什么写什么
+//查找是否匹配
+console.log(reg.test(str))   //返回布尔值true 说明有java
+console.log(reg.exec(str)) //exec方法返回一个数组
+```
+
+
+
+### 进阶语法
+
+#### 元字符
+
+一些具有特殊含义的字符，极大提高了灵活性，具有强大的匹配功能
+
+例如26个英文字母     元字符写法:[a-z]
+
+##### 边界符
+
+用来提示字符所处的位置
+
+| 边界符 | 说明                           |
+| ------ | ------------------------------ |
+| ^      | 表示匹配行首的文本（以谁开始） |
+| $      | 表示匹配行尾的文本（以谁结束） |
+
+```js
+console.log(/^哈/.test('哈'))//true
+console.log(/^哈/.test('哈哈'))//true
+console.log(/^哈/.test('二哈'))//false
+
+console.log(/^哈$/.test('哈'))//true   //表示精确匹配，只能有一个'哈'
+console.log(/^哈$/.test('哈哈'))//false 
+```
+
+##### 量词
+
+用来设定某个模式出现的次数
+
+| 量词  | 说明            |
+| ----- | --------------- |
+| *     | 重复0次或更多次 |
+| +     | 重复1次或更多次 |
+| ？    | 重复0次或1次    |
+| {n}   | 重复n次         |
+| {n,}  | 重复n次或更多次 |
+| {n,m} | 重复n次到m次    |
+
+```js
+console.log(/^哈$/.test('哈'))//true
+console.log(/^哈*$/.test(''))//true
+console.log(/^哈*$/.test('哈哈'))//true
+console.log(/^哈*$/.test('二哈哈二'))//false  没有以 哈 结尾
+
+
+console.log(/^哈{4}$/.test('哈'))//false
+console.log(/^哈{4}$/.test('哈哈'))//false
+console.log(/^哈{4}$/.test('哈哈哈'))//false
+console.log(/^哈{4}$/.test('哈哈哈哈'))//true  必须出现4次
+console.log(/^哈{4,}$/.test('哈哈哈哈哈'))//true 大于等于4次
+```
+
+##### 字符类
+
+###### 一般
+
+```js
+console.log(/[abc]/.test('safac'))//true  包含中括号内任意一个字符，返回true
+console.log(/^[abc]$/.test('safac'))//true
+//可以使用连字符-表示范围
+console.log(/^[a-zA-Z0-9]$/.test('safac22'))//true   匹配所有英文字母和数字
+
+//中括号里的^表示取反
+console.log(/^[^a-z]$/.test('safac22'))//false 匹配小写字符以外的字符
+```
+
+###### 预定义类
+
+一些常见模式的简写方式
+
+| 预定义类 | 说明                                                       |
+| -------- | ---------------------------------------------------------- |
+| \d       | 匹配0-9间的任意数字                                        |
+| \D       | 匹配0-9以外的任意字符                                      |
+| \w       | 匹配任意的字母，数字，下划线 相当于[A-Za-z0-9]             |
+| \W       | 匹配除字母，数字，下划线以外的字符                         |
+| \s       | 匹配空格（包括换行符，制表符，空格符等）相当于[\t\r\n\v\f] |
+| \S       | 匹配非空格字符                                             |
+
+###### 修饰符
+
+/表达式/修饰符
+
+```js
+console.log(/a/i.test('a'))//true   i表示匹配时字母不区分大小写
+console.log(/a/i.test('A'))//true
+
+console.log(/a/g.test('A'))//   g表示全局查找
+```
+
+### replace方法
+
+```js
+字符串.replace(/正则表达式/, '替换的文本')
+const str = 'java是一门编程语言，学好java'
+str.replace(/java/i, 'python')  //将 第一个 java 替换为 python
+str.replace(/java/ig, 'python')  //将 所有的 java 替换为 python
+```
+
